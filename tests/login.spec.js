@@ -61,28 +61,12 @@ describe("Fundix Mobile App", () => {
         ).isDisplayed(),
       { timeout: 5000, timeoutMsg: "Toast message not displayed after sell" }
     );
-    await browser.pause(5000);
     // --- VERIFY IN PORTFOLIO ---
     const portfolioTab = await $(
       `android=new UiSelector().resourceId("portfolio_tab")`
     );
     await clickAndWait(portfolioTab);
-
-    const loader = await $(
-      `android=new UiSelector().className("android.widget.ImageView")`
-    );
-    await browser.waitUntil(
-      async () => {
-        const isDisplayed = await loader.isDisplayed().catch(() => false);
-        return !isDisplayed;
-      },
-      {
-        timeout: 10000,
-        interval: 200,
-        timeoutMsg: "Loader did not disappear in time",
-      }
-    );
-
+    await browser.pause(2000);
     const position = await $(
       `android=new UiSelector().descriptionContains("USDJPY")`
     );
@@ -105,24 +89,15 @@ describe("Fundix Mobile App", () => {
         ).isDisplayed(),
       { timeout: 5000, timeoutMsg: "Position not closed successfully" }
     );
+    await browser.pause(3000);
 
     // --- LOGOUT ---
     const profileButton = await $(
       `android=new UiSelector().className("com.horcrux.svg.PathView").instance(0)`
     );
     await clickAndWait(profileButton);
+    await browser.pause(2000);
 
-    await browser.waitUntil(
-      async () => {
-        const isDisplayed = await loader.isDisplayed().catch(() => false);
-        return !isDisplayed;
-      },
-      {
-        timeout: 5000,
-        interval: 200,
-        timeoutMsg: "Loader did not disappear in time",
-      }
-    );
     await $(
       `android=new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().description("Legal documents"))`
     );
