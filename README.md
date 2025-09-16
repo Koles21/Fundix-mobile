@@ -18,6 +18,11 @@ npm install
 
 appium
 
+4. Run E2E test command:
+
+npx wdio run wdio.conf.js
+   
+
 The main configuration file is wdio.conf.js.
 
 Key Options:
